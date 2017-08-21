@@ -1,0 +1,374 @@
+
+
+\documentclass[12pt,times,onecolumn]{article}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{epstopdf}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[a4paper]{geometry}
+
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+%% \usepackage{lineno}
+
+
+\newcommand{\ml}[1]{\textcolor{blue}{ Mathieu: #1}}
+\newcommand{\fg}[1]{\textcolor{red}{ Felix: #1}}
+
+\begin{document}
+
+Cover
+\clearpage
+\section*{Acknowledgements}
+\clearpage
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+\clearpage
+\section*{Internship summary}
+\addcontentsline{toc}{section}{Internship summary}
+\clearpage
+\tableofcontents
+\clearpage
+
+
+
+\part{Context of the internship}
+\section{LS2N: Laboratoire des Sciences du Numérique de Nantes}
+The Laboratoire des Sciences du Numérique de Nantes (LS2N) which hosted this internship is a mixed research unit (UMR6004) created in january 2017 by the fusion of two research laboratories: the Institut de Recherche en Communication et Cybernétique de Nantes (IRCCyN) and the Laboratoire d'Informatique de Nantes Atlantique (LINA). It is under the supervision of the CNRS, the University of Nantes, the IMT, the Ecole Centrale de Nantes (ECN) and holds a partnership with the INRIA. The laboratory's activities are currently distributed over 5 sites in the city of Nantes, with the most important being located within the ECN's campus.\\
+
+The LS2N's creation aimed at associating the local expertises on computer science and cybernetics. For this reason it contributes on a wide range of research areas:
+\begin{itemize}
+\item System Design and Operation (CCS) which focuses on embedded and industrial systems as well as general automation.
+\item Robotics, Processes and Calculation (RPC) which studies the interactions of robots with their environment,
+\item Data Science and Decision-making (SDD), with topics such as data modelling and classification,
+\item Signals, Images, Ergonomics and Languages (SIEL) that takes interest in particular types of data related to human interactions and perception,
+\item Software and Distributed Systems Science (SLS) which aims at solving software engineering challenges.
+\end{itemize}
+The domains of application are also varied: industry of the future, management of energy and environmental impact, life sciences, vehicle and mobility, design, culture and digital society are all topics on which the LS2N has an expertise and influence.\\
+
+The LS2N regroups 450 staff including researchers, engineers and PhD students. A total of 22 teams exist, each with its own members, research themes and projects. Lastly, the laboratory is involved in several academic programs in Nantes.
+
+\section{The CENSE project}
+
+The need to monitor and reduce noise pollution is nowadays a major concern, especially in urban environments where it is the most intense. To this aim, a few methods are commonly used to gather data relative to noise. First, noise maps are an efficient way to assess environmental boise pollution, and are regularly produced for large cities as required by the European Commission \fg{cite}. Current noise maps are mainly simulated with high-precision grographical data. They however rely on simplified sound source and propagation models that reduce the accuracy of the data. Additionnaly, the models do not consistently correlate with the human perception of a given sound event. Alternatively, observatories sample real sound signals. While these measurements are more accurate, they are very localized in space and are thus insufficient to fully characterize soundscapes. Moreover, the existing observatories are often expensive to install and maintain.\\
+
+The CENSE project aims at proposing a viable solution to both noise maps construction and urban sound environment assessment. The main idea being developped is the deployment of a city-scale, dense low-cost sensor network to allow both measurement accuracy and geographical precision for noise maps. The recorded audio and physical indicators are to be used together with predicted data to combine these sources' advantages: accuracy and highly precise spatial information. The studied sensors are embedded low-power devices with wireless communication systems that are placed on public street lights.\\
+
+The organization of the project is depicted in Figure~\ref{fig:}\fg{figure}. Besides coordination, five interconnected units fragment the objectives into development axes. The Data and Modelling intends to evaluate and improve uncertainties linked to simulated data by accessing exact measured values. The Measurement network of which the present report is a part of aims at implementing a sensor network to match the above-mentionned needs and requirements. The Data assimilation and network optimisation consists in associating the two previous units' outputs, respectively simulated and measured data, to best estimate noise levels in the considered environment. Finally, the Characterisation of sound environments must use available data to better assess urban soundscape contents through indicators such as enhanced noise maps. To promote accessibility and reproductibility of this work, another unit aspires to propose a software platform with all the project's data and a map application.\\
+
+The project is coordinated by the Laboratoire d'Acoustique Environnementale (LAE) at IFSTTAR, although several other entities take part in its development. Their roles and actions are the following:
+\begin{itemize}
+\item The LAE and IFSTTAR also work on sensor placement and acoustical measurements processing,
+\item The CNRS through the LS2N on data encoding with this internship and soundscape characterization,
+\item Bouygues Energies and Services provide the energy and locations of embedded systems,
+\item Wi6Labs \fg{site} implement the sensors and their hardware and software contents,
+\item The Agence Nationale de la Recherche (ANR) funds the project.
+\end{itemize}
+Multiple disciplines and parties are involved with which this internship collaborates closely. 
+
+
+
+
+
+\clearpage
+
+\part{Detailed activities}
+\setcounter{section}{0}
+\section{Objectives}
+This section describes the objectives pursued in the scope of this project.
+\subsection{Audio coding in large scale sensor networks}
+In the context of sensor network at a city scale, an important problem is to process the large amounts of audio signals that are continuously recorded. As the data is to be transmitted through wireless communication, the maximum bitrate allowed to a single sensor is severely insufficient for raw sound measurements. The scope of this work is to develop an audio coder so that all the data can be transferred to a remote server from the sensors.\\
+
+The project primarily aims at processing data through two tasks: acoustic monitoring and audio event recognition. As will be developped later in this report, these two applications are widely different in the physical and mathematical concepts and quantities they involve. However, a common point is the use of relevant information extracted from audio signals instead of the raw data itself. This enables the use of transform functions to reduce dimensionnality. The proposed scheme must therefore employ a representation of the data in a way that efficiently makes both tasks possible.\\
+
+Due to the coder being destined to be implemented on embedded hardware other subsidiary constraints emerge, namely computational and memory costs. The target is a STM32L4 microcontroller with Cortex-M4 processor powered by solar energy. Operations are thus limited as well as data storage.\\
+
+Finally, as sensors initially sample sound pressure, the privacy of citizen is an important concern. A study will be conducted on the intelligibility of encoded speech to ensure that both speakers and utterances content cannot be recognized.\\
+
+Concerning implementation constraints during the project, they are as follow: the coder prototype is to be developped in Matlab, using the expLanes \fg{cite} framework. expLanes principle is to decompose projects into steps with a number of variable factors as inputs. A well defined project architecture is proposed which allows simple runs on different machines and operating systems. It also provides tools for results observation, report generation and execution parameters such as parallel processing. A GitHub repository must be maintained for both the project and a scientific paper presenting its characteristics.
+
+\subsection{Acoustic monitoring}
+
+\begin{itemize}
+\item Biblio (paper)
+\item Third-octave bands as a descriptor
+\item Measurement periods: 125 ms (fast) or 1 s (slow), 20 Hz - 20 kHz
+\item Measurement standards and precision tolerances
+\end{itemize}
+\subsection{Audio event recognition}
+\begin{itemize}
+\item Biblio (paper)
+\item Multiple classification techniques in the litterature
+\item No reference for third-octave bands, necessity to compare results with a commonly used representation, for example mel spectrograms
+\item Similarities between the two descriptors: log scaled spectrum
+\begin{itemize}
+\item The mel is design to model the first layers of human audition (cochlea)
+\item Fractional-octave bands rather use the mathematical concept of octaves
+\end{itemize}
+\end{itemize}
+\subsection{Intelligibility}
+
+\section{Coder scheme}
+
+This section details the composition of the proposed coder scheme, as well as an introduction on the employed concepts and methods.
+
+\subsection{Data representation}
+\subsubsection{Short-Term Fourier Transform}
+To this day, the most commonly used tool for audio signal processing is the Fourier transform. This operation provides a mathematically simple, linear frequency analysis, with low computational complexity while remaining invertible. Despite the advent of more advanced methods such as the wavelet transform \fg{cite}, most audio analysis, classification and synthesis schemes are thus still based on this transform. The two descriptors studied in this report can be obtained from the Fourier transform of a given input signal. As such, the discrete variant of this operation will be used as the first step of the coding scheme.\\
+
+The Discrete Fourier Transform (DFT) of a signal $x[n]$ of arbitrary length $N>0$ is defined as
+\begin{equation}
+X[k] = \mathcal{F}\{x\} = \sum\limits_{n = 0}^{N-1} x[n]e^{-i2\pi k\frac{n}{N}}, k\in [0, N-1]
+\end{equation}
+where $k$ represents the frequency points. The first $N/2+1$ points correspond to the $[0, Fs/2]$ frequencies linearly spaced with a factor of $Fs/N$ for a given sampling rate $Fs$. Because the studied signals are real-valued, the remaining $N/2-1$ points are the complex conjugates of the first half of the representation. The \textit{resolution} of an analysis is defined as $Fs/N$ and provides information regarding the capacity to differenciate two close frequency components in the signal. In some cases the signal will be modified to increase the \textit{precision} of the analysis, \textit{i.e.} the interval between two adjacent frequency points. This can be obtained by zero-padding the signal, but is generally done for practical purposes as it does not increase resolution.
+
+However, in practice the processed signals are rarely stationnary, meaning that the information content of the signal varies with time. The DFT does not account for such variations, and the analysis of a long signal using this transform is often inefficient. The Short-Term Fourier Transform (STFT) is introduced to solve this concern by applying a DFT on fixed-length portions of the signal. Its expression is
+\begin{equation}
+X[m, k] = \sum\limits_{n = 0}^{N-1} x[n]w[mR-n]e^{-j2\pi k\frac{n}{N}}
+\end{equation}
+where $w$ is a windowing function used to isolate analysis frames and $R$ represents the hop size in samples, that is the time interval between two consecutive frames. Unlike the DFT where an implicit unit rectangular window spanning over the whole signal is applied, the STFT explicitely requires a window function as a separate parameter.\\
+
+When applying a Fourier transform on short signals, framing effects can appear due to the windowing function. The convolution theorem states that an element-wise multiplication in the time-domain is equivalent to a convolution in the Fourier space. For this reason, windowing effectively convolutes the pure frequency representation of the signal by the Fourier transform of the used function. This produces an effect known as spectral leakage. Figure~\ref{fig:} \fg{fig} shows the Fourier transform of common windows.
+
+\fg{Figure+ comparaison (rect, hann, gaussian...)}
+
+
+Another property of the Fourier transform is the conservation of energy. Parseval's theorem states that the energy of the Fourier transform is equal to that of the time-domain signal up to a multiplicative constant:
+\begin{equation}
+\sum\limits_{n=0}^{N-1}|x[n]|^2 = \frac{1}{N}\sum\limits_{n=0}^{N-1}|X[k]|^2
+\end{equation}
+where $N$ is the length of the signal $x$. This is a necessary condition to the computation of third-octave bands for acoustic monitoring where the sound level is the main studied measurement.\\
+
+In the coder application, the STFT of a continuously sampled signal is computed. As the studied descriptors depend only on the magnitude of the resulting spectrogram, the phase is discarded as well as the conjugate half. The choice of framing parameters as well as the windowing function will be discussed in the results section.
+
+\subsubsection{Third-octave analysis}
+The third-octave bands analysis consists in the application of bandpass filters with precise gains and cutoff frequencies. The measurement is then computed as the energy of each filtered result. The specifications for such filters are given by the ANSI \fg{num+cite} standard.
+
+\paragraph{Time-filtering\\\\}
+The usual method \fg{cite} to perform fractional-octave analysis involves the design of time-domain FIR \fg{?} filters. The filter coefficients are computed for the highest desired octave and applied on progressively time-decimated versions of the input signal. The corresponding algorithm is presented below.
+
+\fg{algo}
+
+This operation is closely related to wavelet analysis in both design and complexity \fg{confirm}. However, its main limitation is given by the constraints of time-domain filter design such as ripples, slopes and causality conditions.
+
+\paragraph{FFT-based filtering\\\\}
+An alternative method is proposed in \fg{cite} using the Fourier representation of the signal. The filters can then be defined as constant frequency weights, and the filtering operation as a matrix multiplication.\\
+
+The cutoff frequencies are shared by adjacent bands. The frequency weights matrix is thus designed around the corresponding points $k_i$ as follows:
+\begin{align}
+G_i(k_i+p_i) &= sin\left(\frac{\pi}{2}\varphi_l(p_i)\right)\\
+G_i(k_{i+1}+p_{i+1}) &= cos\left(\frac{\pi}{2}\varphi_l(p_{i+1})\right)\\
+\varphi_l(p_i) &= sin\left(\frac{\pi}{2}\varphi_{l-1}(p_i)\right)\\
+\varphi_0(p_i) &= \frac{1}{2}\left(\frac{p_i}{P_i}+1\right), p_i \in [-P_i, P_i]
+\end{align}
+where $P_i$ determines the frequency range where the weights are between 0 and 1 around each cutoff frequency, and the $l$ parameter controls the slope of the resulting filters. All other frequencies are assigned a weight of 1 between the increasing and decreasing part of a band, and 0 otherwise. Figure~\ref{fig:}\fg{fig} shows an example of bandpass filter computed with this process for different values of $l$.\\
+
+\noindent This design ensures the following properties $\forall~l\geq 1$:
+\begin{itemize}
+\item The cutoff frequencies weights are fixed to -3dB
+\item The energy of the signal is conserved over all bands, as the sum of the square of filter weights along bands equals 1 for all frequency points.
+\end{itemize}
+For $l = 2$ or $l = 3$, the filters are shown to be compliant with the ANSI\fg{num} standard.\\
+
+Although this method allows for arbitrary filter design, it is limited by the framing effects inherent to the STFT, particularly visible in low frequencies. It is also apparently of lower computational complexity than time-filtering, and is thus preferred in the proposed coder scheme.
+
+\subsection{Data encoding}
+At this level in the coder process, the data is constituted of third-octave bands representations of the audio input signal. The data is accumulated over arbitrary durations to form texture frames to be transmitted. Depending on the time integration of 125~ms or 1~s and with 31 bands within the range of [20~Hz, 20~kHz], the representation is a matrix of size $8T\times 31$ or $T\times 31$ respectively for $T$ seconds texture frames. The data size can however be further reduced using source coding techniques.
+
+\subsubsection{Notions on source and entropy coding}
+Every signal follows a distribution which can be associated to a probability density function (PDF). Digital signals have limited possibility as to the different values they can take, depending on the type of data they are coded on. These values are referred to as symbols, and result in discrete probability distributions. The PDF then contain the precise probability of appearance of each symbol, and can be exploited to pair each symbol or group of symbols to a code of different size so that the output data size is minimized.\\
+
+The Shannon entropy $H$ defines the least possible average code size per input symbol given a signal's distribution. It is expressed as:
+\begin{equation}
+H = \sum\limits_i p_ilog_n(p_i), i = 0,..,i
+\end{equation}
+where $p_i$ is the probability of appearance of the $i^{th}$ symbol and $n$ is the output representational base, usually 2 for binary outputs.
+
+The entropy is therefore closely related to the PDF and the underlying information content of the data. It is minimum at $H = 0$ when the signal is deterministic, \textit{i.e.} when a single symbol with a probability of 1 appears. Conversely, it reaches a maximum for uniform distributions at $H = log_n(1/N)$ where N is the number of symbols. A low entropy is thus achieved for signals with few values appearing with high probabilities and a low range of possible symbols.\\
+
+Entropy coding algorithms use symbol-probability pairs to approach entropy. Arithmetic \fg{cite} and Huffman \fg{cite} coding are two examples, and the latter is studied in this work.
+
+\subsubsection{Huffman coding}
+The Huffman algorithm is summarized in Figure~\ref{fig:}\fg{fig}. For $n = 2$, symbols are sorted by probability of appearance, then a binary Huffman tree is constructed using the following principle: at each step, the two lowest probabilities are drawn from the list and associated in the tree. The sum of the two probabilities is then added back to the list. When the root of the tree attains the cumulated probability of 1, the symbols are assigned a variable-length code. Each layer away from the root adds a bit so that the highest probability symbol has a one-bit code while the rarest has the longest code. The resulting symbol-code pairs form a Huffman dictionnary which is then used to transcribe inputs. The size of separately encoded symbols using this method is optimal, that is the closest achievable to the data entropy. Huffman coding is a straightforward algorithm with few situational variants.
+
+\subsubsection{Proposed algorithm}
+To allow for minimal errors, the audio analysis step is computed using data types with sizes ranging from 16 to 64 bits per stored value. Directly applying a coding algorithm is thus inefficient due to large dictionnaries inducing high computational costs and output code dimensions. A quantization step is used to reduce the number of symbols to an acceptable amount of $2^q$ values for q-bit values.\\
+
+However, an example of data distribution computed for environmental audio recordings is shown in Figure~\ref{fig:}a \fg{fig}. Third-octave measurements are concentrated in low values and linearly quantifying would result in most of the information being lost. The use of a logarithmic function solves this problem by "flattening" the PDF. Measurements are therefore expressed in dB, then quantized as visible in Figure~\ref{fig:}b\fg{fig}.\\
+
+In order to enable better Huffman coding performances, the PDF must follow the principles discussed in section 2.2.1. As measurements are made continuously, third-octave bands values usually vary slowly. Especially when using overlap in the STFT, consecutive frames contain redundant information that can be eliminated. To this aim $\Delta$-compression is applied along the time dimension. It consists in subtracting each frame to the previous one to encode only variations in the signal. This has the desired effect of concentrating the probability of appearance around zero as shown in Figure~\ref{fig:}c\fg{fig}. $\Delta$-compression inherently doubles the maximum number of symbols: for a signal $x\in [0, N]$, the result is $x_\Delta \in [-N, N]$. This is easily outweighted by the effects on the PDF and the compression yields a significant efficiency increase of Huffman coding.\\
+
+One last choice regarding data encoding concerns the construction of the Huffman dictionnary. One solution is to generate a tree and dictionnary for each texture frame, which is then optimal but must be transmitted along with the code. Alternatively, a global dictionnary can be computed from large databases of environmental sounds. In that case, the coding process does not take into account the exact data distribution and must pair every possible symbol with a code. The added data of the first method and the sub-optimality of the second are found to compensate each other as they yield equivalent performances in this application. The computational complexity is found to be lower with dynamic dictionnary generation for a Matlab implementation, due to the number of symbols being generally between 2 and 5 time less than in the full dictionnary.
+
+\subsection{Overview of the proposed scheme}
+The coder scheme is summarized in Figure~\ref{fig:}\fg{fig}.
+
+\fg{equations}
+
+\section{Experimental validation setup}
+\subsection{Datasets}
+To evaluate the performances of the proposed coder, two datasets are used. The first consists of urban environmental audio recordings, and is used for measurement error, event recognition and bitrate concerns as its contents match the aim of the application. Furthermore, as inintelligibility is to be ensured in decoded and reconstructed audio extracts, a second dataset of clean speech recordings is studied.
+
+\subsubsection{UrbanSound8k}
+UrbanSound8k \fg{cite} is a dataset of urban audio recordings proposed by the Sounds Of New-York City (SONYC) project researchers. It is composed of 8732 audio extracts with varying durations of less than 4~s, amounting to about 9 hours total. Each excerpt corresponds to one class among ten: \textit{street music}, \textit{child playing}, \textit{dog bark}, \textit{air conditionning}, \textit{drilling}, \textit{jackhammer}, \textit{car engine}, \textit{siren}, \textit{car horn}, \textit{gunshot}. The proportions are quite balanced with 1000 extracts per class except for the three last with about 900, 400 and 400 files respectively. The audio is provided at a sampling rate of 44.1~kHz in wave format which allows a degree of freedom as to the quality of the input data for testing purposes.\\
+
+The UrbanSound8k dataset is a subset of a larger one, UrbanSound, made with the aim of providing a small but reliable resource for environmental audio applications such as classification. For this reason the data is distributed over 10 independant folds containing multiple examples of each class of sound, enabling cross-validation schemes. Several classification schemes and results are proposed for this dataset that can be used as a baseline, with techniques ranging from support vector machines and decision trees \fg{cite} to deep learning \fg{cite} with unsupervised feature learning \fg{cite}.
+
+\subsubsection{Speech recordings}
+For intelligibility concerns, a small dataset of 23 clean speech recordings is used. This is to ensure the validity of the proposed test's results in the final implementation: if clean speech is made inintelligible, speech occurences in an environmental context where noise levels are important will be even harder to comprehend.\\
+
+The dataset contains recordings of 9 french sentences enunciated by 6 different speakers, 3 of which are male and 3 female. This represent a total of 216 extracts of about 3 seconds each. The recordings were made in studio conditions and provided in 44.1~kHz stereo wave files.
+
+
+\subsection{Measurement error}
+The measurement error of third-octave bands is one of the main concerns of the coder validation, as this indicator is subject to strict tolerances. In the studied application, the error is two-fold: third-octave bands computation from raw audio is biased by framing the signal and the data encoding chain adds quantization error to the data.
+\subsubsection{Analysis error}
+\fg{do}
+\begin{itemize}
+\item Reference implementation: ita\_ toolbox
+\item Test on white noise and UrbanSound8k extracts
+\item Factors
+\begin{itemize}
+\item Effect of framing (125~ms/1~s, frame overlap)
+\item Effect of windowing (Windows with different construction types)
+\end{itemize}
+\end{itemize}
+
+\subsubsection{Additional encoding error}
+The data encoding process is composed of lossless operations with the exception of quantization. The representation before this step is given in dB. Let us define $\varepsilon$ as the absolute error between the data $x$ and its quantized equivalent $x_q$, such as
+\begin{equation}
+\varepsilon = |x_q-x|
+\end{equation}
+The entire encoding process is defined by the desired Huffman dictionnary size $N_H$ which is linked to a word size $q$ with the relation
+\begin{equation}
+q = log_2(N_H)
+\end{equation}
+$q$ is obtained at the output of $\Delta$-compression. The values after quantization are thus coded on $q-1$ bits. $x_q$ is then given by:
+\begin{equation}
+x_q(n) = \frac{\Delta_x}{2^{q-1}-1}\textrm{round}\left(\frac{(2^{q-1}-1)x(n)}{\Delta_x}\right), x\in \left[0, \Delta_x\right]
+\end{equation}
+where $\Delta_x$ is the range of values taken by $x$. The error $\varepsilon$ can then be theoretically estimated by modelling the PDF of $x$ with a uniform distribution such as $x\sim \textit{U}\{0, \Delta_x\}$. While in reality $x$ will never be uniform, this approximation matches the aim of a decibel representation as discussed in section 2.2.3. $\varepsilon$ then also follows a uniform distribution $\varepsilon\sim U\{0, \frac{\Delta_x}{2\times (2^{q-1}-1)}\}$. Its mean $\mu_\varepsilon$ and standard deviation $\sigma_\varepsilon$ are:
+\begin{equation}
+\begin{cases}
+	\mu_\epsilon = \frac{\Delta_x}{4\times (2^{q-1}-1)}\\
+	\sigma_\epsilon = \frac{1}{12}\frac{\Delta_x}{2\times (2^{q-1}-1)}
+\end{cases}
+\end{equation}
+In practice, the error is therefore assumed to be $\varepsilon = f(\Delta_x, \frac{1}{2^{q-1}-1})$ with the heterogeneity of the data's PDF inducing small variations to the equations in (12). Most mathematical operations such as base 10 logarithm and matrix multiplication can induce small additional rounding errors, especially on embedded implementations. Furthermore, the error should be the same across all third-octave bands as quantization operation is applied regardless of data dimensions.\\
+
+The experimental evaluation consists in computing the absolute error for a set of word sizes $q$. The UrbanSound8k dataset is used to provide meaningful results both in audio data nature and number of examples.
+
+\subsection{Event recognition}
+
+Descriptors based on third-octave bands analysis are relatively untested on classification tasks. In order to ensure that the proposed scheme allows the recognition of events using state of the art methods, it can be compared to the very similar and commonly used features derivated from mel bands analysis. Baseline performances \fg{cite} are available for the UrbanSound8k dataset using Mel-Frequency Cepstrum Coefficients (MFCC), which are obtained by applying a Discrete Cosine Transform (DCT) to mel bands. The same operation is performed on third-octave bands to match the physical meaning of the MFCC descriptor.\\
+
+The event recognition task performance is evaluated on four different models to ensure the validity of the results:
+\begin{itemize}
+\item a Support Vector Machine (SVM), which isolates data distributions of different classes by finding the maximum-margin separation between them. In this application, the C-SVM variant is used as a nonlinear classifier with a radial-basis function (RBF) kernel of variance $\sigma^2$. $C$ and $\sigma^2$ are found via grid search.
+\item a Decision Tree (DT), that learns to take consecutive decisions based on the input features.
+\item a Random Forest (RF) classifier, which is an ensemble method based on the decision tree. It uses the bagging concept of training several models and classifying by majority voting. The number of trees is here set to 500.
+\item a k-Nearest Neighbors (KNN) classifier, which simply outputs the class of a test sample as that of the $k$ closest training examples. If N features characterize each data point, a N-dimensional mathematical distance is computed. In this evaluation the metric is the Euclidean distance and $k = 5$.
+\end{itemize}
+
+The features are computed from the 25 first mel or third-octave cepstrum coefficients, which as summarized along time with the mean, variance, skewness, kurtosis, minimum, maximum, median, derivative mean and variance, second order derivative mean and variance operators. The feature vector are thus comprised of 275 values. Each classifier is trained using 10-fold cross-validation which consists in training the models with 9 of the 10 folds and testing with the last, that for each of the 10 possible combinations.\\
+
+For this process, the studied coder factors are the quantization word size $q$ and analysis frame duration. Mel spectrogram analysis is computed with the baseline 23~ms, 50\% overlap windows, then averaged over time to match the 125~ms or 1~s integration time used for third-octave bands measurements.
+
+
+\subsection{Output bitrate}
+
+Another metric of the efficiency of the proposed scheme is the measurement of the output data bitrate. Similarly to classification, the parameters influencing the bitrate are the representation's time resolution and encoded word size $q$.
+
+
+\subsection{Intelligibility assessment}
+
+Encoding a raw audio recording should render it inintelligible at reconstruction. To guarantee this property the clean speech dataset presented in section 3.1.2 is passed through the encoding process, then decoded and recovered using methods detailed in Appendix A \fg{label}. Intelligibility is then assessed using both objective and subjective indicators. Results will be shown for varying time resolutions during analysis only as the quantization was found to have very little impact on the perceived intelligibility.
+
+\subsubsection{Objective indicators}
+
+Intelligibility is known as an important factor in psychoacoustics and noisy environment studies. As a results, many objective indicators have been developped to model intelligibility based on either raw audio or spectral features. A review of these metrics is available in \fg{cite}. Various concepts and physical properties are exploited, although almost every method compares the noisy signal to a clean version. While several of the indicators are proved to correlate well with subjective estimations of intelligibility, results are only available for small degradations such as clipping and addition of white or colored noise. The studied signals experience much harsher conditions with band analysis and discarded phase spectrum. The accuracy of objective metrics is therefore not guaranteed and need to be compared to subjective evaluations.\\
+
+Two indicators with good apparent results are computed. First, the Coherence-SII (CSII) \fg{cite} is based on the Speech Intelligibility Index (SII) \fg{cite}. It measures 
+
+\fg{equations?}
+
+Second, 
+
+\begin{itemize}
+\item Many indicators exist (Biblio)
+\item CSII and fwSNRseg have been tested for this application (idea and calculation)
+\end{itemize}
+
+
+\subsubsection{Perceptual test}
+A perceptual intelligibility test is also conducted as both a reference for comparison with the objective indicators and an accurate evaluation to validate that the coder ensures privacy for the studied parameters.\\
+
+The test is realised under the following conditions: a Matlab interface is displayed on a desktop computer. Each extract is played through \textit{Beyerdynamics DT 770} headphones in a random order. The output level is the same for all subjects. For each example, the participant is asked to type the words he understands and to rate the global intelligibility between 1 and 5. The Intelligibility Ratio (IR) \textit{i.e.} the percentage of correctly transcribed words constitutes the first subjective metric while the Average Intelligibility Score (AIS), that is the note scaled to 0 and 1, is a second indicator. 12 subjects of age ranging from 17 to 60 which reported normal hearing participated to the listening test.
+
+
+\section{Results}
+Results and interpretations will be written from the corresponding paper sections, with a few additions detailed here
+\subsection{Measurement error}
+\paragraph{Analysis error}
+\begin{itemize}
+\item To be further discussed with IFSTTAR
+\end{itemize}
+\paragraph{Coder additional error}
+\subsection{Event recognition}
+\begin{itemize}
+\item Add confusion matrices to further justify the similarities bewteen (and maybe differenciate) the two studied representations?
+\end{itemize}
+\subsection{Output bitrate}
+\subsection{Intelligibility}
+\begin{itemize}
+\item Add objective indicators to prove their irrelevance to the problem's conditions (distortions, phase discarding)
+\end{itemize}
+
+\clearpage
+\part{Personal report}
+\clearpage
+\section*{Conclusion}
+\addcontentsline{toc}{section}{Conclusion}
+
+\clearpage
+\appendix
+\section{Signal reconstruction techniques}
+\subsection{Spectrogram recovery from band representations}
+\subsection{Phase recovery problem}
+\subsection{Algorithms}
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+
+\end{document}
+
+\endinput
+%%
+%% End of file `elsarticle-template-harv.tex'.
