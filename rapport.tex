@@ -51,11 +51,11 @@
 \clearpage
 \section*{Introduction}
 \addcontentsline{toc}{section}{Introduction}
-This report concludes the masters internship proposed as part of the final year at ESEO with a two-fold objective. First, it was an opportunity to put to test both the technical knowledge and work skills learned during the five years of studies through an experience of long duration within a full company environment. Second, it aimed at finalizing the professional project developed at ESEO.\\
+This report presents the masters internship proposed as part of the final year at ESEO with a two-fold objective. First, it was an opportunity to put to test both the technical knowledge and working skills learned during the five years of studies through an experience of long duration within a full company environment. Second, it aimed at finalizing the professional project developed at ESEO.\\
 
-With regard to this last point, I had considered pursuing a PhD thesis in audio signal processing and machine-learning for a long time. The academic environment, the correlation with my expectations and the overall quality of ongoing works motivated my decision to apply at the Laboratoire des Sciences du Num\'erique de Nantes. I had the possibility to join the CENSE project and contribute to research on an ever-rising problem: noise management in large cities and more generally the comprehension of urban soundscapes.\\
+With respect to this last point, I had considered pursuing a PhD thesis in audio signal processing and machine-learning for a long time. The academic environment, the correlation with my expectations and the overall quality of ongoing works motivated my decision to apply at the Laboratoire des Sciences du Num\'erique de Nantes. I had the possibility to join the CENSE project and contribute to research on an ever-rising problem: noise management in large cities and more generally the understanding of urban soundscapes.\\
 
-The internship's purpose was to enable continuous transmission of measured audio data through a city-scale sensor network. An audio coding scheme was necessary to satisfy several constraints linked to the size of the data, its information content for furhter processing concerns and the embedded hardware capabilities.\\
+The internship's purpose was to enable continuous transmission of measured audio data through a city-scale sensor network. An audio coding scheme was necessary to satisfy several constraints linked to the size of the data, its information content for further processing concerns and the embedded hardware capabilities.\\
 
 The first part of this report will provide contextual elements to the internship. A detailed explanation of the work contributing to the subject will be presented in the second part. Lastly, a third part will briefly reflect my view of the experience, as well as the many issues and opportunities faced during these past six months.
 
@@ -76,6 +76,8 @@ The first few weeks were dedicated to \fg{finish}
 \paragraph{Results\\}
 The coder is completed, its parametrization as well as embedded implementation is being discussed with other members of the project. A study of the multiple involved factors was conducted with regard to the technical constraints. A scientific paper was also redacted and will be proposed for peer review and publication in the near future.
 
+\ml{pas forcément besoin de changer, mais à l'avenir, l'Anglais technique s'écrit au présent, sauf cas tres specifique.}
+
 \clearpage
 \tableofcontents
 \clearpage
@@ -87,7 +89,7 @@ The coder is completed, its parametrization as well as embedded implementation i
 
 \part{Context of the internship}
 \section{LS2N: Laboratoire des Sciences du Num\'erique de Nantes}
-The Laboratoire des Sciences du Num\'erique de Nantes (LS2N) which hosted this internship is a mixed research unit (UMR6004) created in january 2017 by the fusion of two research laboratories: the Institut de Recherche en Communication et Cybern\'etique de Nantes (IRCCyN) and the Laboratoire d'Informatique de Nantes Atlantique (LINA). It is under the supervision of the CNRS, the University of Nantes, the IMT, the \'Ecole Centrale de Nantes (ECN) and holds a partnership with the INRIA. The laboratory's activities are currently distributed over 5 sites in the city of Nantes, with the most important being located within the ECN's campus.\\
+The Laboratoire des Sciences du Num\'erique de Nantes (LS2N) which hosted this internship is a joint research unit (UMR6004) created in january 2017 as a result of the fusion of two research laboratories: the Institut de Recherche en Communication et Cybern\'etique de Nantes (IRCCyN) and the Laboratoire d'Informatique de Nantes Atlantique (LINA). It is under the supervision of the CNRS, the University of Nantes, the IMT, the \'Ecole Centrale de Nantes (ECN) and holds a partnership with the INRIA. The laboratory's activities are currently distributed over 5 sites in the city of Nantes, with the most important being located within the ECN's campus.\\
 
 The LS2N's creation aimed at associating the local expertises on computer science and cybernetics. For this reason it contributes on a wide range of research areas:
 \begin{itemize}
@@ -97,13 +99,13 @@ The LS2N's creation aimed at associating the local expertises on computer scienc
 \item Signals, Images, Ergonomics and Languages (SIEL) that takes interest in particular types of data related to human interactions and perception,
 \item Software and Distributed Systems Science (SLS) which aims at solving software engineering challenges.
 \end{itemize}
-The domains of application are also varied: industry of the future, management of energy and environmental impact, life sciences, vehicle and mobility, design, culture and digital society are all topics on which the LS2N has an expertise and influence.\\
+The domains of application are: industry of the future, management of energy and environmental impact, life sciences, vehicle and mobility, design, culture and digital society are all topics on which the LS2N has an expertise and influence.\\
 
 The LS2N regroups 450 staff including researchers, engineers and PhD students. A total of 22 teams exist, each with its own members, research themes and projects. Lastly, the laboratory is involved in several academic programs in Nantes.
 
 \section{The CENSE project}
 
-The need to monitor and reduce noise pollution is nowadays a major concern, especially in urban environments where it is the most intense. To this aim, a few methods are commonly used to gather data relative to noise. First, noise maps are an efficient way to assess environmental boise pollution, and are regularly produced for large cities as required by the European Commission \fg{cite}. Current noise maps are mainly simulated with high-precision grographical data. They however rely on simplified sound source and propagation models that reduce the accuracy of the data. Additionnaly, the models do not consistently correlate with the human perception of a given sound event. Alternatively, observatories sample real sound signals. While these measurements are more accurate, they are very localized in space and are thus insufficient to fully characterize soundscapes. Moreover, the existing observatories are often expensive to install and maintain.\\
+The need to monitor and reduce noise pollution is nowadays a major concern, especially in urban environments where it is the most intense. To this aim, a few methods are commonly used to gather data relative to noise. First, noise maps are an efficient way to assess environmental boise pollution, and are regularly produced for large cities as required by the European Commission \fg{cite}. Current noise maps are mainly simulated with high-precision geographical data. They however rely on simplified sound source and propagation models that reduce the accuracy of the data. Additionnaly, the models do not consistently correlate with the human perception of a given sound event. Alternatively, observatories sample real sound signals. While these measurements are more accurate, they are very scarcely distributed in space and are thus insufficient to fully characterize soundscapes. Moreover, the existing observatories are often expensive to install and maintain.\\
 
 \begin{figure}[htbp]
 	\centering
@@ -112,9 +114,11 @@ The need to monitor and reduce noise pollution is nowadays a major concern, espe
 	\label{fig:cense_logo}
 \end{figure}
 
-The CENSE project aims at proposing a viable solution to both noise maps construction and urban sound environment assessment. The main idea being developed is the deployment of a city-scale, dense low-cost sensor network to allow both measurement accuracy and geographical precision for noise maps. The recorded audio and physical indicators are to be used together with predicted data to combine these sources' advantages: accuracy and highly precise spatial information. The studied sensors are embedded low-power devices with wireless communication systems that are placed on public street lights. The city of Lorient was selected to develop this project.\\
+The CENSE project, funded by the ANR (French national research funding agency), aims at proposing a viable solution to both noise maps construction and urban sound environment assessment. The main idea being developed is the deployment of a city-scale, dense low-cost sensor network to allow both measurement accuracy and geographical precision for noise maps. The recorded audio and physical indicators are to be used together with predicted data to combine these sources' advantages: accuracy and highly precise spatial information. The studied sensors are embedded low-power devices with wireless communication systems that are placed on public street lights. The city of Lorient was selected to develop this project.\\
 
-The project is divided in six parts in its organization. Besides coordination, five interconnected units fragment the objectives into development axes. The Data and Modelling intends to evaluate and improve uncertainties linked to simulated data by accessing exact measured values. The Measurement network of which the present report is a part of aims at implementing a sensor network to match the above-mentionned needs and requirements. The Data assimilation and network optimisation consists in associating the two previous units' outputs, respectively simulated and measured data, to best estimate noise levels in the considered environment. Finally, the Characterisation of sound environments must use available data to better assess urban soundscape contents through indicators such as enhanced noise maps. To promote accessibility and reproductibility of this work, another unit aspires to propose a software platform with all the project's data and a map application.\\
+The project is divided in six parts in its organization. Besides coordination, five interconnected units fragment the research objectives into development axes. The Data and Modelling intends to evaluate and improve uncertainties linked to simulated data by accessing exact measured values. The Measurement network of which the present report is a part of aims at implementing a sensor network to match the above-mentionned needs and requirements. The Data assimilation and network optimisation consists in associating the two previous units' outputs, respectively simulated and measured data, to best estimate noise levels in the considered environment. Finally, the Characterisation of sound environments must use available data to better assess urban soundscape contents through indicators such as enhanced noise maps. To promote accessibility and reproductibility of this work, another unit aspires to propose a software platform with all the project's data and a map application.\\
+
+\ml{use itemize for previous par}
 
 The project is coordinated by the Laboratoire d'Acoustique Environnementale (LAE) at IFSTTAR, although several other entities take part in its development. Their roles and actions are the following:
 \begin{itemize}
@@ -124,7 +128,7 @@ The project is coordinated by the Laboratoire d'Acoustique Environnementale (LAE
 \item Wi6Labs implement the sensors and their hardware and software contents,
 \item The Agence Nationale de la Recherche (ANR) funds the project.
 \end{itemize}
-Multiple disciplines and parties are involved with which this internship collaborates closely. 
+Multiple disciplines and parties are involved with which this internship collaborates closely.
 
 %\subsection{Sensor network}
 
@@ -140,13 +144,15 @@ This section describes the objectives pursued in the scope of this project.
 \subsection{Audio coding in large scale sensor networks}
 In the context of sensor network at a city scale, an important problem is to process the large amounts of audio signals that are continuously recorded. As the data is to be transmitted through wireless communication, the maximum bitrate allowed to a single sensor is severely insufficient for raw sound measurements. The scope of this work is to develop an audio coder so that all the data can be transferred to a remote server from the sensors.\\
 
-The project primarily aims at processing data through two tasks: acoustic monitoring and audio event recognition. As will be developed later in this report, these two applications are widely different in the physical and mathematical concepts and quantities they involve. However, a common point is the use of relevant information extracted from audio signals instead of the raw data itself. This enables the use of transform functions to reduce dimensionnality. The proposed scheme must therefore employ a representation of the data in a way that efficiently makes both tasks possible.\\
+The project primarily aims at processing data through two tasks: acoustic monitoring and audio event recognition. As will be developed later in this report, these two applications are different in the physical and mathematical concepts and quantities they involve. However, a common point is the use of relevant information extracted from audio signals instead of the raw data itself. This enables the use of transform functions to reduce bitrate. The proposed scheme must therefore employ a representation of the data in a way that efficiently makes both tasks possible.\\
 
-Due to the coder being destined to be implemented on embedded hardware other subsidiary constraints emerge, namely computational and memory costs. The target is a STM32L4 microcontroller with Cortex-M4 processor powered by solar energy. Operations are thus limited as well as data storage.\\
+\ml{replaced by bitrate, dimensionality is a ML word}
+
+Due to the coder being targeted to be implemented on embedded hardware other subsidiary constraints emerge, namely computational and memory costs. The target is a STM32L4 microcontroller with Cortex-M4 processor powered by solar energy. Operations are thus limited as well as data storage.\\
 
 Finally, as sensors initially sample sound pressure, the privacy of citizen is an important concern. A study will be conducted on the intelligibility of encoded speech to ensure that both speakers and utterances content cannot be recognized.\\
 
-Concerning implementation constraints during the project, they are as follow: the coder prototype is to be developed in Matlab, using the expLanes \cite{explanes} framework. expLanes principle is to decompose projects into steps with a number of variable factors as inputs. A well defined project architecture is proposed which allows simple runs on different machines and operating systems. It also provides tools for results observation, report generation and execution parameters such as parallel processing. A GitHub repository must be maintained for both the project and a scientific paper presenting its characteristics.
+Concerning implementation constraints during the project, they are as follow: the coder prototype is to be developed in Matlab, and evaluated using the expLanes \cite{explanes} framework. expLanes principle is to decompose projects into steps with a number of variable factors as inputs. A well defined project architecture is proposed which allows simple runs on different machines and operating systems. It also provides tools for results observation, report generation and execution parameters such as parallel processing. A GitHub repository must be maintained for both the project and a scientific paper presenting its characteristics.
 
 \subsection{Acoustic monitoring}
 The considered sensor network primarily aims at monitoring urban sound environment, that is, continuously assessing their content and impact on the population. In the literature, this is typically performed by measuring energetic acoustic indicators such as the equivalent sound pressure level $L_{eq}$ in dB SPL or its A-weighted equivalent $L_{Aeq}$ in dBA. However, while these indicators have proven to correlate well with perceptual evaluations for negative impact sound environments \cite{gozalo2015}, they are not sufficient to fully describe urban sound environments \cite{rychtarikova2013}. Many other variables can be derived to better account for previously implicit properties \cite{can2016} including percentile values or time dynamics. Studies have been conducted to select relevant subsets of descriptors in sound environment characterization \cite{can2015, brocolini2013, nilsson2007}. The mentionned $L_{eq}$ features are measured at periods of 0.125~ms or 1~s, respectively fast and slow as a convention.\\
@@ -291,7 +297,7 @@ The coder scheme is summarized in Figure~\ref{fig:scheme}.
 \begin{figure}[htbp]
 	\centering
 		\includegraphics[width=1\textwidth]{figures/scheme.pdf}
-	\caption{Overview of the coder process.}
+	\caption{Overview of the coder processing scheme.}
 	\label{fig:scheme}
 \end{figure}
 \section{Experimental validation setup}
@@ -389,7 +395,7 @@ The test is realised under the following conditions: a Matlab interface is displ
 \subsection{Measurement error}
 \paragraph{Analysis error\\\\}
 
-\paragraph{Coder additional error\\\\}
+\paragraph{Encoding error\\\\}
 The additional error caused by the encoding steps after obtaining the desired data representation, with the word size $q$ varying. Figure~\ref{fig:error_q} shows an estimation of the error $\hat{\varepsilon}$ as a function of $q$ for third-octave and Mel bands. In both cases, the mean and standard deviation seem to decrease by a factor of 2 as $q$ increases. This is in accordance with the approximate theoretical expressions obtained in equation~\ref{eq:13}. This error is to be added to the measurement error discussed in the precedent section.
 
 \begin{figure}[htbp]
@@ -547,28 +553,29 @@ Alternatively, the frequency-weighted segmental SNR considers only spectrogram m
 
 This part provides personal views and perspectives regarding this internship, both retrospectively and about its implication on my future development. To this aim, the recurring technical and human challenges, opportunities and discoveries will be detailed.\\
 
-The main technical issue encountered still follows my work. I had indeed poor initial knowledge on acoustics and even basic audio signal processing. Either to correctly design the system or to interpret results, I often had to read entire book chapters about new notions. Fortunately, my referent professor and other people I interacted with were always willing to help by providing me with either written material, oral explanations or even a course. I continue to view this concern as an opportunity to enrich the yet small extent of my knowledge.\\
+The main technical issue encountered still follows my work. I had indeed poor initial knowledge on acoustics and only basic audio signal processing. Either to correctly design the system or to interpret results, I often had to read entire book chapters about new notions. Fortunately, my referent professor and other people I interacted with were always willing to help by providing me with either written material, oral explanations or even a course. I continue to view this concern as an opportunity to enrich the yet small extent of my knowledge.\\
 
-A second major technical problem was the computation of third-octave bands measurement error. The issue had multiple factors. First, I did not have access to the full text of standards about this indicator and thus only had approximate tolerances to work with. Second, there was a lack of reference implementation to compare estimations with. The ita\_toolbox supposedly was one, but that was never really demonstrated in the studied conditions of short-time analysis. Third, there was also a lack of clear experimental setup. The error was computed as an absolute difference, which is only sensible if the unit of measurements is disregarded. Uncertainties on the nature of the quantities to compare were also regularly discussed. A significant amount of time was spent in trying to solve this problem with acousticians at IFSTTAR, that while important was subsidiary to the internship's objective.\\
+A second major technical problem was the computation of third-octave bands measurement error. The issue had multiple factors. First, I did not have access to the full text of standards about this indicator and thus only had approximate tolerances to work with. Second, there was a lack of reference implementation to compare with. The ita\_toolbox supposedly was one, but that was never really demonstrated in the studied conditions of short-time analysis. Third, there was also a lack of clear experimental setup. The error was computed as an absolute difference, which is only sensible if the unit of measurements is disregarded. Uncertainties on the nature of the quantities to compare were also regularly discussed. A significant amount of time was spent in trying to solve this problem with acousticians at IFSTTAR, that while important was subsidiary to the internship's objective.\\
 
-Organization-wise, I often misjudged the duration of certain tasks leading to previsional plannings not being respected. Similarly, some of my priorities were suboptimal and I had difficulties stopping on more delicate, less secondary problems. Every mistake is however an opportunity to learn and I retrospectively do not view these issues as pointless failures.\\
+Organization-wise, I often misjudged the duration of certain tasks leading to previsional plannings not being fully met. Similarly, some of my priorities were suboptimal and I had difficulties stopping on more delicate, less secondary problems. Every mistake is however an opportunity to learn and I retrospectively do not view these issues as pointless failures.\\
 
-Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. To this regard, the experience was formative and I am grateful to have discovered it during a six month long work than as part of a PhD thesis preparation.\\
+Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. In this respect, this six month long working experience was formative. \ml{reformuler la suite} than as part of a PhD thesis preparation.\\
 
-Overall this masters internship was accurate preview of the academic and research world in which I intend to develop. I was familiarized with the specific technical knowledge on experimental rules, results interpretation, paper writing and bibliographical search among others. New work organization elements were also addressed, as well as project management tools and practices. Lastly, I was introduced to a passionate and open community which corresponds in every respect to my expectations.\\
+Overall this masters internship was an accurate preview of the academic and research world in which I intend to develop. I was familiarized with the specific technical knowledge on experimental rules, results interpretation, paper writing and bibliographical search among others. New work organization elements were also addressed, as well as project management tools and practices. Lastly, I was introduced to a passionate and open community which corresponds in every respect to my expectations.\\
 
+\ml{:)}
 
 \clearpage
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
-This report presented the work accomplished during this six-months masters internship. An audio coder scheme has been developed which allows the computation of acoustic indicators and sound event recognition while degrading the intelligibility of speech. It is also suitable for the formulated bitrate and complexity constraints.\\
+This report presented the work accomplished during this six-months masters internship. An audio coder scheme has been developed which allows the computation of acoustic indicators and sound event recognition while degrading the intelligibility of speech. It also fullfills the requested constraints in terms of bitrate and computational complexity.\\
 
 
-This internship was rich in multiple regards. The activity involved diverse domains of technical skills, previously unknown for some, and tested a significant part of my training. The CENSE project is the first truly large project that I am a part of, with more than ten member entities expert in their own domain working together towards solving a single problem. My exchanges with researchers and engineers in other areas allowed me to understand the views, aims and concerns of each and provided me with an accurate insight about large research projects.\\
+This internship was rich in multiple aspects. My working activity involved diverse domains of technical skills, previously unknown for some, and tested a significant part of my training. The CENSE project is the first truly large project that I am a part of, with more than ten member entities with strong expertise in their own domain working together towards solving a single problem. My exchanges with researchers and engineers in other areas allowed me to understand the views, aims and concerns of each and provided me with an accurate insight about large research projects.\\
 
 I also acquired a global vision on the research and academic environment. This includes time and resources management, project development, technical practices and several other points ranging from information on scientific journals organization to complete experiment management methods.\\
 
-The internship comforted me in my decision to pursue a PhD thesis. I look forward to the three upcomung years during which part of my work will benefit the CENSE project. This will also allow me to follow the implications of the scheme I helped develop for its embedded implementation and operation. The redacted paper will finally be proposed for publication in the next few months.
+The internship comforted me in my decision to pursue a PhD thesis. I look forward to the three upcomung years during which part of my work will benefit the CENSE project. This will also allow me to follow the implications of the scheme I helped develop for its embedded implementation and operation. A journal paper will be submitted to a special issue on smart cities of the MDPI Sensors journal (impact factor 2.6) in the next few months.
 
 \clearpage
 \appendix
