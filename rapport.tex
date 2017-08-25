@@ -21,7 +21,7 @@
 %% The amssymb package provides various useful mathematical symbols
 \usepackage{amssymb}
 \usepackage{amsmath}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{color}
 \usepackage{multirow}
 \usepackage{subcaption}
@@ -29,7 +29,7 @@
 \usepackage[a4paper]{geometry}
 \usepackage{pdfpages}
 \usepackage{epstopdf}
-
+\usepackage{glossaries}
 
 %% The amsthm package provides extended theorem environments
 %% \usepackage{amsthm}
@@ -46,7 +46,25 @@
 \begin{document}
 \includepdf[pages={1}]{cover.pdf}
 
+
 \section*{Acknowledgements}
+
+I am particularly grateful to Mathieu Lagrange who directed this internship. His close monitoring helped guide me throughout the many aspects of this experience.\\
+
+I would like to thank Pierre Aumond at IFSTTAR for his broad contribution to the development of the coder, as well as to the written paper which he took the time to fully review several times. The fruitful discussions on fractional-octave band measurement error constituted an invaluable help.\\
+
+I wish to thank Arnaud Can at IFSTTAR for his implication in the CENSE project and his interest in the present work. His insight and comments on the paper were particularly appreciated.\\
+
+I express my gratitude to Jean-Rémy Gloaguen, PhD student at IFSTTAR/LS2N, for his sincere will to support my work with his extensive knowledge of acoustics.\\
+
+I would like to thank Ludovic Charpentier, engineer at Wi6labs, for his patience regarding the embedded implementation of the proposed scheme.\\
+
+I thank Catherine Lavandier of the Universit\'e de Cergy for her continued interest in my work, and along with Jean-François Petiot and Mathieu Lagrange for accepting to supervise my upcoming PhD thesis.
+
+Finally, I would like to thank all the members of the Laboratoire des Sciences du Num\'erique de Nantes and of the CENSE project for their warm welcome into this internship and the research world in general.
+
+
+
 
 \clearpage
 \section*{Introduction}
@@ -72,11 +90,16 @@ The internship took place between 1rst March 2017 and 8th September 2017, for a 
 \paragraph{Team and contacts\\}
 This internship was mostly composed of individual work. Regular exchanges were planned with my referent professor, M. Lagrange, to discuss about progress and planning concerns. I also worked with other members of the project from June to the end, including engineers at Wi6labs regarding an embedded implementation of the studied scheme and A. Can/P. Aumond at IFSTTAR about acoustic indicators and more generally the writing of the scientific paper.
 \paragraph{Summarized planning\\}
-The first few weeks were dedicated to \fg{finish}
-\paragraph{Results\\}
-The coder is completed, its parametrization as well as embedded implementation is being discussed with other members of the project. A study of the multiple involved factors was conducted with regard to the technical constraints. A scientific paper was also redacted and will be proposed for peer review and publication in the near future.
+\begin{itemize}
+\item First two months: bibliographical research on acoustics and audio signal processing, study of datasets and classification methods, first version of the coder without computing acoustic indicators.
+\item To early May: study of the coder's parameters effects on intelligibility indicators, classification tasks and bitrate.
+\item Mid May to early June: computation of third-octave bands and paper writing beginning.
+\item To the end of the internship: paper writing, intelligibility, measurement errors and sharing of this work with the project's teams.
+\end{itemize}
 
-\ml{pas forcément besoin de changer, mais à l'avenir, l'Anglais technique s'écrit au présent, sauf cas tres specifique.}
+\paragraph{Results\\}
+The coder is completed, its parametrization as well as embedded implementation is being discussed with other members of the project. A study of the multiple involved factors is conducted with regard to the technical constraints. A scientific paper is also redacted and will be proposed for peer review and publication in the near future.
+
 
 \clearpage
 \tableofcontents
@@ -105,7 +128,7 @@ The LS2N regroups 450 staff including researchers, engineers and PhD students. A
 
 \section{The CENSE project}
 
-The need to monitor and reduce noise pollution is nowadays a major concern, especially in urban environments where it is the most intense. To this aim, a few methods are commonly used to gather data relative to noise. First, noise maps are an efficient way to assess environmental boise pollution, and are regularly produced for large cities as required by the European Commission \fg{cite}. Current noise maps are mainly simulated with high-precision geographical data. They however rely on simplified sound source and propagation models that reduce the accuracy of the data. Additionnaly, the models do not consistently correlate with the human perception of a given sound event. Alternatively, observatories sample real sound signals. While these measurements are more accurate, they are very scarcely distributed in space and are thus insufficient to fully characterize soundscapes. Moreover, the existing observatories are often expensive to install and maintain.\\
+The need to monitor and reduce noise pollution is nowadays a major concern, especially in urban environments where it is the most intense. To this aim, a few methods are commonly used to gather data relative to noise. First, noise maps are an efficient way to assess environmental boise pollution, and are regularly produced for large cities as required by the European Commission \cite{euc2002}. Current noise maps are mainly simulated with high-precision geographical data. They however rely on simplified sound source and propagation models that reduce the accuracy of the data. Additionnaly, the models do not consistently correlate with the human perception of a given sound event. Alternatively, observatories sample real sound signals. While these measurements are more accurate, they are very scarcely distributed in space and are thus insufficient to fully characterize soundscapes. Moreover, the existing observatories are often expensive to install and maintain.\\
 
 \begin{figure}[htbp]
 	\centering
@@ -116,9 +139,14 @@ The need to monitor and reduce noise pollution is nowadays a major concern, espe
 
 The CENSE project, funded by the ANR (French national research funding agency), aims at proposing a viable solution to both noise maps construction and urban sound environment assessment. The main idea being developed is the deployment of a city-scale, dense low-cost sensor network to allow both measurement accuracy and geographical precision for noise maps. The recorded audio and physical indicators are to be used together with predicted data to combine these sources' advantages: accuracy and highly precise spatial information. The studied sensors are embedded low-power devices with wireless communication systems that are placed on public street lights. The city of Lorient was selected to develop this project.\\
 
-The project is divided in six parts in its organization. Besides coordination, five interconnected units fragment the research objectives into development axes. The Data and Modelling intends to evaluate and improve uncertainties linked to simulated data by accessing exact measured values. The Measurement network of which the present report is a part of aims at implementing a sensor network to match the above-mentionned needs and requirements. The Data assimilation and network optimisation consists in associating the two previous units' outputs, respectively simulated and measured data, to best estimate noise levels in the considered environment. Finally, the Characterisation of sound environments must use available data to better assess urban soundscape contents through indicators such as enhanced noise maps. To promote accessibility and reproductibility of this work, another unit aspires to propose a software platform with all the project's data and a map application.\\
-
-\ml{use itemize for previous par}
+The project is divided in six parts in its organization. Besides coordination, five interconnected units fragment the research objectives into development axes:
+\begin{itemize}
+\item The \textbf{Data and Modelling} intends to evaluate and improve uncertainties linked to simulated data by accessing exact measured values.
+\item The \textbf{Measurement network} of which the present report is a part of aims at implementing a sensor network to match the above-mentionned needs and requirements.
+\item The \textbf{Data assimilation} and network optimisation consists in associating the two previous units' outputs, respectively simulated and measured data, to best estimate noise levels in the considered environment.
+\item The \textbf{Characterisation of sound environments} must use available data to better assess urban soundscape contents through indicators such as enhanced noise maps.
+\end{itemize}
+Finally, to promote accessibility and reproductibility of this work, another unit aspires to propose a software platform with all the project's data and a map application.\\
 
 The project is coordinated by the Laboratoire d'Acoustique Environnementale (LAE) at IFSTTAR, although several other entities take part in its development. Their roles and actions are the following:
 \begin{itemize}
@@ -146,8 +174,6 @@ In the context of sensor network at a city scale, an important problem is to pro
 
 The project primarily aims at processing data through two tasks: acoustic monitoring and audio event recognition. As will be developed later in this report, these two applications are different in the physical and mathematical concepts and quantities they involve. However, a common point is the use of relevant information extracted from audio signals instead of the raw data itself. This enables the use of transform functions to reduce bitrate. The proposed scheme must therefore employ a representation of the data in a way that efficiently makes both tasks possible.\\
 
-\ml{replaced by bitrate, dimensionality is a ML word}
-
 Due to the coder being targeted to be implemented on embedded hardware other subsidiary constraints emerge, namely computational and memory costs. The target is a STM32L4 microcontroller with Cortex-M4 processor powered by solar energy. Operations are thus limited as well as data storage.\\
 
 Finally, as sensors initially sample sound pressure, the privacy of citizen is an important concern. A study will be conducted on the intelligibility of encoded speech to ensure that both speakers and utterances content cannot be recognized.\\
@@ -157,7 +183,7 @@ Concerning implementation constraints during the project, they are as follow: th
 \subsection{Acoustic monitoring}
 The considered sensor network primarily aims at monitoring urban sound environment, that is, continuously assessing their content and impact on the population. In the literature, this is typically performed by measuring energetic acoustic indicators such as the equivalent sound pressure level $L_{eq}$ in dB SPL or its A-weighted equivalent $L_{Aeq}$ in dBA. However, while these indicators have proven to correlate well with perceptual evaluations for negative impact sound environments \cite{gozalo2015}, they are not sufficient to fully describe urban sound environments \cite{rychtarikova2013}. Many other variables can be derived to better account for previously implicit properties \cite{can2016} including percentile values or time dynamics. Studies have been conducted to select relevant subsets of descriptors in sound environment characterization \cite{can2015, brocolini2013, nilsson2007}. The mentionned $L_{eq}$ features are measured at periods of 0.125~ms or 1~s, respectively fast and slow as a convention.\\
 
-Most measured or derived indicators describe the global urban soundscape and lack information on its composition. Sound sources recognition enables a more efficient understanding of soundscape properties. For instance, a bird song and traffic noise with the same energy can be perceived very differently. The analysis of sources within a sound environment is generally linked with spectral content \cite{ishiyama2000} and high temporal measurement resolutions. Other indicators can correlate with specific sound environment content \fg{cite Aumond/Lavandier TFSD} but do not achieve the same performances as a source detection scheme in characterizing soundscapes.\\
+Most measured or derived indicators describe the global urban soundscape and lack information on its composition. Sound sources recognition enables a more efficient understanding of soundscape properties. For instance, a bird song and traffic noise with the same energy can be perceived very differently. The analysis of sources within a sound environment is generally linked with spectral content \cite{ishiyama2000} and high temporal measurement resolutions. Other indicators can correlate with specific sound environment content \cite{aumond2017} but do not achieve the same performances as a source detection scheme in characterizing soundscapes.\\
 
 A solution is the calculation of spectral energetic indicators such as the 31 third-octave bands within the human audition range 20~Hz - 20~kHz. Slow or fast third-octave bands measurement appears suitable for this work's purpose: in addition to being a relevant descriptor \cite{torija2013} for urban sound environment assessment, it allows for the computation of most cited indicators while representing reasonably small, fixed amounts of data to be transmitted. It additionnaly contains spectral information that can be used for source recognition tasks. However, as a tradeoff other representations such as Mel or Bark spectrograms, as well as psychoacoustical indicators cannot be precisely estimated.
 
@@ -189,6 +215,7 @@ This section details the composition of the proposed coder scheme, as well as an
 
 \subsection{Data representation}
 \subsubsection{Short-Term Fourier Transform}
+\label{stft}
 To this day, the most commonly used tool for audio signal processing is the Fourier transform. This operation provides a mathematically simple, linear frequency analysis, with low computational complexity while remaining invertible. Despite the advent of more advanced methods such as the wavelet transform \cite{bentley1994}, most audio analysis, classification and synthesis schemes are thus still based on this transform. The two descriptors studied in this report can be obtained from the Fourier transform of a given input signal. As such, the discrete variant of this operation will be used as the first step of the coding scheme.\\
 
 The Discrete Fourier Transform (DFT) of a signal $x[n]$ of arbitrary length $N>0$ is defined as
@@ -203,9 +230,14 @@ X[m, k] = \sum\limits_{n = 0}^{N-1} x[n]w[mR-n]e^{-j2\pi k\frac{n}{N}}
 \end{equation}
 where $w$ is a windowing function used to isolate analysis frames and $R$ represents the hop size in samples, that is the time interval between two consecutive frames. Unlike the DFT where an implicit unit rectangular window spanning over the whole signal is applied, the STFT explicitely requires a window function as a separate parameter.\\
 
-When applying a Fourier transform on short signals, framing effects can appear due to the windowing function. The convolution theorem states that an element-wise multiplication in the time-domain is equivalent to a convolution in the Fourier space. For this reason, windowing effectively convolutes the pure frequency representation of the signal by the Fourier transform of the used function. This produces an effect known as spectral leakage. Figure~\ref{fig:} \fg{fig} shows the Fourier transform of common windows.
+When applying a Fourier transform on short signals, framing effects can appear due to the windowing function. The convolution theorem states that an element-wise multiplication in the time-domain is equivalent to a convolution in the Fourier space. For this reason, windowing effectively convolutes the pure frequency representation of the signal by the Fourier transform of the used function. This produces an effect known as spectral leakage. Figure~\ref{fig:fft_win} shows the Fourier transform of common windows. The rectangular window has a narrow main lobe, so that a FFT bin value is unaffected by its neighbours. However, its sidelobes gains are high (the first peak at -13~dB compared to the main lobe) and even far frequency components have an impact on a given bin. Conversely, the Hann window has a larger main lobe but the sidelobes rapidly decrease in amplitude. Finally, the gaussian window compromises between the two by displaying a better attenuation on the first sidelobes.
 
-\fg{Figure+ comparaison (rect, hann, gaussian...)}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics[width=0.5\columnwidth]{figures/fft_win.eps}
+	\caption{Comparison of common windowing functions and their effect on the Fourier transform.}
+	\label{fig:fft_win}
+\end{figure}
 
 
 Another property of the Fourier transform is the conservation of energy. Parseval's theorem states that the energy of the Fourier transform is equal to that of the time-domain signal up to a multiplicative constant:
@@ -319,16 +351,7 @@ The dataset contains recordings of 9 french sentences enunciated by 6 different 
 \subsection{Measurement error}
 The measurement error of third-octave bands is one of the main concerns of the coder validation, as this indicator is subject to strict tolerances. In the studied application, the error is two-fold: third-octave bands computation from raw audio is biased by framing the signal and the data encoding chain adds quantization error to the data.
 \subsubsection{Analysis error}
-\fg{do}
-\begin{itemize}
-\item Reference implementation: ita\_ toolbox
-\item Test on white noise and UrbanSound8k extracts
-\item Factors
-\begin{itemize}
-\item Effect of framing (125~ms/1~s, frame overlap)
-\item Effect of windowing (Windows with different construction types)
-\end{itemize}
-\end{itemize}
+To study the analysis error of third-octave bands, they can be compared to a trusted reference implementation. To this aim, third-octave bands measured in both "fast" computation with 125~ms windows and "slow" 1~s analysis mode are averaged over time to compute the acoustic indicator on extracts of several seconds. The chosen reference considers the Matlab \textit{ita\_ toolbox} implementation \cite{itatoolbox2017}. In both cases the sound dataset is the same and is composed of 2~s extracts. The experiment is run for white noise as well as urban environmental recordings. As the analysis frames are of short duration, poor frequency resolution and spectral leakage are expected, particularly in the lower frequencies bands. For this reason we evaluate the effect of the use of windowing functions on each band measurement error in order to mitigate this loss of precision. To provide relevant statistics, these quantities are estimated for about 4500 extracts obtained from the UrbanSound8k dataset \cite{salamon2014} and 4500 \textit{iid.} noise sequences.
 
 \subsubsection{Additional encoding error}
 The data encoding process is composed of lossless operations with the exception of quantization. The representation before this step is given in dB. Let us define $\varepsilon$ as the absolute error between the data $x$ and its quantized equivalent $x_q$, such as
@@ -394,6 +417,29 @@ The test is realised under the following conditions: a Matlab interface is displ
 \section{Results}
 \subsection{Measurement error}
 \paragraph{Analysis error\\\\}
+The measurement error is computed for third-octave bands. Results are displayed in Figure~\ref{fig:error_m}. Only full-octave bands are shown for visibility. When computing the slow analysis, it is found that applying overlap attenuates the error. This is not observed for fast analysis where the error is similar or higher with the use of overlapping frames. As all experiments on noise show a mean error close to zero, the absolute error metric is preferred.\\
+
+As can be expected when performing a short time analysis, high errors appear in low frequency bands where precision is poor. The slow analysis yields better estimations as it provides a globally better resolution and thus also reduces the impact of spectral leakage effects in this region. When considering white noise (left) the error is low on the whole spectrum. This effectiveness does not translate to environmental sounds analysis. A factor of this phenomenon is the sound level disparities absent in the first case but omnipresent in the second. In fact, spectral leakage induces a correlation between close frequency components as briefly explained in section~\ref{stft}. In lower frequencies, large differences between adjacent frequency bins can cause important errors on third-octave bands computations. This issue is however not specific to Fourier transform based schemes as it is also encountered with a time domain filtering approach.\\
+
+To mitigate this phenomenon, the choice of the window function shall be studied further. For a fast analysis with no overlap, the rectangular window seems a reasonable choice at first with its energy conservation qualities. While it yields the lowest error in high frequency bands, its high spectral leakage effect makes it unprecise for lower frequency regions. Non-flat windows better account for this issue but require assuming that the signal is stationary in a given frame and are thus biased. For slow measurements, the rectangular window impact is less harmful to band analysis due to an increased frequency resolution.\\
+
+\begin{figure*}[h!]
+    \centering
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/err_m_n.eps} 
+        \caption{Noise extracts}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[h]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/err_m_u.eps} 
+        \caption{Urban sounds recordings}
+    \end{subfigure}
+    \caption{\label{fig:error_m}Measurement error of third-octave bands over two-seconds recordings. The analysis of short frames has an effect on energy estimation at low frequencies. Framing is more impactful on signals where the energy is localized in frequency.}
+\end{figure*}
+
+To prove that the FFT-based method is not solely responsible for these errors, third-octave bands are computed via the \textit{ita\_toolbox} reference for the same parameters (fast and slow, windowing, overlap). It is found that for all parameters and all bands, except for the five lower frequency bands in fast analysis, the resulting errors are not statistically different to those obtained with the proposed method. For the remaining bands, the toolbox shows slightly higher or lower errors.
 
 \paragraph{Encoding error\\\\}
 The additional error caused by the encoding steps after obtaining the desired data representation, with the word size $q$ varying. Figure~\ref{fig:error_q} shows an estimation of the error $\hat{\varepsilon}$ as a function of $q$ for third-octave and Mel bands. In both cases, the mean and standard deviation seem to decrease by a factor of 2 as $q$ increases. This is in accordance with the approximate theoretical expressions obtained in equation~\ref{eq:13}. This error is to be added to the measurement error discussed in the precedent section.
@@ -530,7 +576,7 @@ Perceptual test results confirm the qualitative evaluation of speech properties 
 	\label{fig:subj_int}
 \end{figure}
 
-The CSII accounts for the distance between clean and distorted audio spectrograms at each point in time and frequency. This includes the phase, which we discard early in the representation step. The error induced by forward and inverse third-octave bands transformation as well as operations reducing data dimensionality further contribute to very high element-wise disparities. In fact, the signal is too distorted for the proposed SNR normalization to ensure CSII values in the 0-1 range. When compared to perceptual test results, the CSII shows no clear separation in the 10 frames per second neighbourhood. It is therefore not a good indicator in the studied conditions.\\
+The CSII accounts for the distance between clean and distorted audio spectrograms at each point in time and frequency. This includes the phase, which we discard early in the representation step. The error induced by forward and inverse third-octave bands transformation as well as operations reducing data bitrate further contribute to very high element-wise disparities. In fact, the signal is too distorted for the proposed SNR normalization to ensure CSII values in the 0-1 range. When compared to perceptual test results, the CSII shows no clear separation in the 10 frames per second neighbourhood. It is therefore not a good indicator in the studied conditions.\\
 
 \begin{figure}[htbp]
 	\centering
@@ -557,13 +603,12 @@ The main technical issue encountered still follows my work. I had indeed poor in
 
 A second major technical problem was the computation of third-octave bands measurement error. The issue had multiple factors. First, I did not have access to the full text of standards about this indicator and thus only had approximate tolerances to work with. Second, there was a lack of reference implementation to compare with. The ita\_toolbox supposedly was one, but that was never really demonstrated in the studied conditions of short-time analysis. Third, there was also a lack of clear experimental setup. The error was computed as an absolute difference, which is only sensible if the unit of measurements is disregarded. Uncertainties on the nature of the quantities to compare were also regularly discussed. A significant amount of time was spent in trying to solve this problem with acousticians at IFSTTAR, that while important was subsidiary to the internship's objective.\\
 
-Organization-wise, I often misjudged the duration of certain tasks leading to previsional plannings not being fully met. Similarly, some of my priorities were suboptimal and I had difficulties stopping on more delicate, less secondary problems. Every mistake is however an opportunity to learn and I retrospectively do not view these issues as pointless failures.\\
+Organization-wise, I often misjudged the duration of certain tasks leading to previsional plannings not being fully met. Similarly, some of my priorities were suboptimal and I had difficulties stopping on more delicate, less secondary problems. Every mistake is however an opportunity to learn and I retrospectively do not view these issues as failures.\\
 
-Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. In this respect, this six month long working experience was formative. \ml{reformuler la suite} than as part of a PhD thesis preparation.\\
+Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. In this respect, this six month long working experience was formative. It introduced me to a different method as opposed to the teamwork-oriented approach I was familiar with, effectively adjusting my organization as it can be expected as part of a PhD thesis preparation.\\
 
 Overall this masters internship was an accurate preview of the academic and research world in which I intend to develop. I was familiarized with the specific technical knowledge on experimental rules, results interpretation, paper writing and bibliographical search among others. New work organization elements were also addressed, as well as project management tools and practices. Lastly, I was introduced to a passionate and open community which corresponds in every respect to my expectations.\\
 
-\ml{:)}
 
 \clearpage
 \section*{Conclusion}
