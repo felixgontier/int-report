@@ -427,19 +427,19 @@ To mitigate this phenomenon, the choice of the window function shall be studied 
     \centering
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/err_m_n.eps} 
+        \includegraphics[width=\linewidth]{figures/err_m_n.eps}
         \caption{Noise extracts}
     \end{subfigure}
     \hfill
     \begin{subfigure}[h]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/err_m_u.eps} 
+        \includegraphics[width=\linewidth]{figures/err_m_u.eps}
         \caption{Urban sounds recordings}
     \end{subfigure}
     \caption{\label{fig:error_m}Measurement error of third-octave bands over two-seconds recordings. The analysis of short frames has an effect on energy estimation at low frequencies. Framing is more impactful on signals where the energy is localized in frequency.}
 \end{figure*}
 
-To prove that the FFT-based method is not solely responsible for these errors, third-octave bands are computed via the \textit{ita\_toolbox} reference for the same parameters (fast and slow, windowing, overlap). It is found that for all parameters and all bands, except for the five lower frequency bands in fast analysis, the resulting errors are not statistically different to those obtained with the proposed method. For the remaining bands, the toolbox shows slightly higher or lower errors.
+To demonstrate that the FFT-based method is not solely responsible for these errors, third-octave bands are computed via the \textit{ita\_toolbox} reference for the same parameters (fast and slow, windowing, overlap). It is found that for all parameters and all bands, except for the five lower frequency bands in fast analysis, the resulting errors are not statistically different to those obtained with the proposed method. For the remaining bands, the toolbox exhibit slightly higher or lower errors.
 
 \paragraph{Encoding error\\\\}
 The additional error caused by the encoding steps after obtaining the desired data representation, with the word size $q$ varying. Figure~\ref{fig:error_q} shows an estimation of the error $\hat{\varepsilon}$ as a function of $q$ for third-octave and Mel bands. In both cases, the mean and standard deviation seem to decrease by a factor of 2 as $q$ increases. This is in accordance with the approximate theoretical expressions obtained in equation~\ref{eq:13}. This error is to be added to the measurement error discussed in the precedent section.
@@ -605,7 +605,7 @@ A second major technical problem was the computation of third-octave bands measu
 
 Organization-wise, I often misjudged the duration of certain tasks leading to previsional plannings not being fully met. Similarly, some of my priorities were suboptimal and I had difficulties stopping on more delicate, less secondary problems. Every mistake is however an opportunity to learn and I retrospectively do not view these issues as failures.\\
 
-Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. In this respect, this six month long working experience was formative. It introduced me to a different method as opposed to the teamwork-oriented approach I was familiar with, effectively adjusting my organization as it can be expected as part of a PhD thesis preparation.\\
+Working alone on a daily basis, though evidently expected in an academic environment, was arduous at times. However, this issue did not have as important an impact as I first imagined. In fact, apart from a few moments towards three months after the beginning of the internship, I quickly started adapting to this concept and it never really slowed my progress. In this respect, this six month long working experience was formative. It introduced me to a different approach of production as opposed to the teamwork-oriented approach I was familiar with, effectively adjusting my agenda and working methods to those that can be expected for a PhD candidate.\\
 
 Overall this masters internship was an accurate preview of the academic and research world in which I intend to develop. I was familiarized with the specific technical knowledge on experimental rules, results interpretation, paper writing and bibliographical search among others. New work organization elements were also addressed, as well as project management tools and practices. Lastly, I was introduced to a passionate and open community which corresponds in every respect to my expectations.\\
 
